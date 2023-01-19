@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e58f11f0a4.js" crossorigin="anonymous"></script>
+    <link rel = "stylesheet" href = "/styling/NewEvent.css">
+    <title>New Event Page</title>
+<body>
+  <div id="page-container">
+    <div id="content-wrap">
+    <div class="navigation-bar">
+       <a href="index.html"> <img src = "/images/Eternals-1.png" alt ="not working" id = "logo"></a>
+        <div id="navigation-container">
+          <ul>
+            <li><a href="NewEvent.html">New Event</a></li>
+            <li><a href="#">Sign Up</a></li>
+            <li><a href="#">Login</a></li>
+          </ul>
+        </div>
+        </div>
+        <div class="sub-nav">
+          <ul>
+        <li class = "subheader"><a href="Events.html">Events</a></li>
+          </ul>
+        </div>
+        
+        
+        <form action = "#" method="get">
+          <br><p>
+        <label for="Category">Category</label>
+        <select id ="Category" name = "Category" required>
+          <option value="" disabled selected hidden>-- Select a Category --</option>
+          <option value="1">Homework</option>
+          <option value="2">Work</option>
+          <option value="3">Clubs</option>
+          <option value="4">School</option>
+          <option value="5">Other</option> 
+        </select>
+        <br><br>
+        </p>
+          <p>
+            <label for="a">Title</label>
+            <input id="a" type="text" name="Title" placeholder="Title" required><br><br>
+          </p>
+          <p>
+            <label for="b">Details</label>
+            <input id="b" type="text" placeholder="Description" required><br><br>
+          </p>
+          <p>
+            <label for="c">Where</label>
+            <input id="c" type="text" placeholder="Location" required><br><br>
+          </p>
+          <p>
+            <label for="DatetToStart">Start</label>
+            <input type="datetime-local" id="DatetToStart" name="DatetToStart" required><br><br>
+          </p>
+          <p>
+            <label for="DateToEnd">End</label>
+            <input type="datetime-local" id="DateToEnd" name="DateToEnd" required><br><br>
+          </p>
+          <p>
+            <label for="img">Image</label>
+            <input type="file" id="img" name="img" accept="image/*" required><br>
+          </p>
+          <p>
+            <label for="Sub">Submit</label>
+            <input type="submit" value="Submit" id="Sub"><br><br>
+          </p>
+        </form>
+    <footer>
+      <br>
+        <a href = "#">Eternals&copy;</a>
+        <a href = "#">Contact</a>
+        <a href = "#">About</a>
+        <div class="Social-Media">
+          <a href = "#"><i class="fa-brands fa-facebook"></i></a>
+          <a href = "#"><i class="fa-brands fa-twitter"></i></a>
+      </div>
+    </footer>
+    </div>
+    </div>
+</body>
+</html>
