@@ -13,6 +13,8 @@ router.get('/:id', validateId, controller.show);
 router.get('/:id/edit', validateId, isLoggedIn, isHost, controller.edit);
 router.put('/:id', validateId, isLoggedIn, isHost, fileUpload, controller.update);
 router.delete('/:id', validateId, isLoggedIn, isHost, controller.delete);
+router.post('/:id/rsvp', validateId, isLoggedIn, controller.rsvp)
+
 
 //exporting the router
 module.exports = router;
