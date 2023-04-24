@@ -1,6 +1,6 @@
-const { Model } = require('mongoose');
-const { events } = require('../models/eventModel');
+const mongoose = require('mongoose');
 const model = require('../models/eventModel');
+const rsvpModel = require('../models/RSVP');
 
 
 function findByCategory(model, category) {
@@ -45,11 +45,15 @@ exports.create = (req, res, next) => {
 
 
 exports.show = (req, res, next) => {
-    let id = req.params.id;
 
-    model.findById(id).populate('host')
-        .then(event => {
+    let id = req.params.id;
+    let rsvpValue = 0;
+
+    Promise.all([model.findById(id).populate('host'), rsvpModel.find({ event: id })])
+    .then((results )=>{
+        const [event, rsvps] = results;
             if (event) {
+                rsvps.forEach((rsvp) => rsvp.status === 'Yes' ? rsvpCount++ : null)
                 res.render('./event/show', { event });
             } else {
                 let err = new Error('Cannot find a event with id ' + id);
