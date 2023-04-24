@@ -59,13 +59,15 @@ exports.login = (req, res, next) => {
 
 exports.profile = (req, res, next) => {
   let id = req.session.user;
-  Promise.all([model.findById(id), Event.find({ host: id })])
+  Promise.all([User.findById(id), Event.find({ host: id }), Rsvp.find({ host: id }).populate('event')])
     .then((results) => {
-      const [user, events] = results;
-      res.render("./user/profile", { user, events });
+      const [user, events, rsvps] = results;
+      console.log(user, events, rsvps);
+      res.render("./user/profile", { user, events, rsvps });
     })
     .catch((err) => next(err));
 };
+
 
 exports.logout = (req, res, next) => {
   req.session.destroy((err) => {
