@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "bootstrap": "^5.2.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.0.0",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "fileupload": "^1.0.0",
+    "install": "^0.13.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^7.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "new-form": "^1.0.0"
+  },
+  "name": "snyder-rivers-project4",
+  "version": "1.0.0",
+  "description": "This is a continuous project for the NBAD class",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rivers Snyder",
+  "license": "ISC",
+  "devDependencies": {}
+}
