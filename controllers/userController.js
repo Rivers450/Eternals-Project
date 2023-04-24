@@ -1,5 +1,6 @@
 const model = require("../models/user");
 const Event = require("../models/eventModel");
+const RSVPmodel = require('../models/RSVP');
 
 exports.new = (req, res) => {
   res.render("./user/new");
