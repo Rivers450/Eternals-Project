@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const model = require('../models/eventModel');
-const rsvpModel = require('../models/RSVP');
+const RSVPmodel = require('../models/RSVP');
 
 
 function findByCategory(model, category) {
@@ -49,12 +49,12 @@ exports.show = (req, res, next) => {
     let id = req.params.id;
     let rsvpValue = 0;
 
-    Promise.all([model.findById(id).populate('host'), rsvpModel.find({ event: id })])
-    .then((results )=>{
-        const [event, rsvps] = results;
+    Promise.all([model.findById(id).populate('host'), RSVPmodel.find({ event: id })])
+        .then((results) => {
+            const [event, rsvps] = results;
             if (event) {
-                rsvps.forEach((rsvp) => rsvp.status === 'Yes' ? rsvpCount++ : null)
-                res.render('./event/show', { event });
+                rsvps.forEach((rsvp) => rsvp.status === 'Yes' ? rsvpValue++ : null)
+                res.render('./event/show', { event, rsvpValue });
             } else {
                 let err = new Error('Cannot find a event with id ' + id);
                 err.status = 404;
@@ -135,3 +135,26 @@ exports.delete = (req, res, next) => {
         })
         .catch(err => next(err));
 };
+
+exports.rsvp = (req, res, next) => {
+    let id = req.params.id;
+
+    let rsvpItem = new RSVPmodel({
+        status: req.body.rsvp,
+        host: req.session.user,
+        event: new mongoose.Types.ObjectId(id),
+    });
+
+    let query = { event: rsvpItem.event, host: rsvpItem.host };
+    let update = { status: rsvpItem.status };
+    let options = { upsert: true }
+
+    RSVPmodel.findOneAndUpdate(query, update, options)
+        .then((event) => {
+            req.flash("success", "Your RSVP status is now set to: " + req.body.rsvp + "!")
+            return res.redirect('/events/' + id)
+        })
+        .catch((err) => {
+            return next(err);
+        })
+}
