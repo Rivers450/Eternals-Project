@@ -1,0 +1,55 @@
+<%- include('../partials/header.ejs')%>
+  <div class="content">
+    <form action="/events" enctype="multipart/form-data" method="POST" class="new-form">
+      <label for="Category" id="categoryAlignment">Category:</label>
+      <div class=dropDown>
+        <select id="Category" name="category" required class="alignContent">
+          <option value="" disabled selected hidden>-- Select a Category --</option>
+          <option value="Homework" name="homework" id="Category">Homework</option>
+          <option value="Work">Work</option>
+          <option value="Clubs">Clubs</option>
+          <option value="Outings">Outings</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <br><br>
+      <label for="a" id="alignTitle">Title:</label>
+
+      <div class="title">
+        <input id="a" type="text" name="title" placeholder="Title" required class="alignContent"><br><br>
+      </div>
+
+
+      <label for="b" id="alignDetails">Details:</label>
+
+      <div class="details">
+        <input id="b" type="text" placeholder="Description" name="details" required class="alignContent"><br><br>
+      </div>
+
+      <label for="c" id="alignLocation">Where:</label>
+
+      <div class="location">
+        <input type="text" placeholder="Location" name="location" required class="alignContent"><br><br>
+      </div>
+
+      <label for="DateToStart" id="alignStart">Start:</label>
+
+      <div class="start">
+        <input type="datetime-local" id="DateToStart" name="startTime" required><br><br>
+      </div>
+
+      <label for="DateToEnd" id="alignEnd">End:</label>
+      <div class="end">
+        <input type="datetime-local" id="DateToEnd" name="endTime" class="alignContent" required> <br><br>
+      </div>
+      <label for="img" id="alignImage">Image: </label>
+
+      <div class="imageTextArea">
+        <input type="file" id="alignImage" name="image" class="alignContent" accept="image/*" required><br>
+      </div>
+      <input type="submit" value="Submit">
+    </form>
+    <img src="<%= typeof image !== 'undefined'? image: ''%>" style="width: 100%">
+
+  </div>
+  <%- include('../partials/footer.ejs')%>

@@ -1,0 +1,53 @@
+<%- include('../partials/header.ejs')%>
+    <div class="content">
+        <div class="titleButtons">
+            <form>
+                <h4 class="eventTitle"><i>
+                        <%= event.title%>
+                            <% if(user){%>
+                                <% if (event.host._id==user) { %>
+                                    <button type="submit" formmethod="GET" formaction="/events/<%=event.id%>/edit">
+                                        <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #228b22;"></i>
+                                    </button>
+                                    <button type="submit" formmethod="POST"
+                                        formaction="/events/<%=event.id%>?_method=DELETE">
+                                        <i class="fa-sharp fa-solid fa-trash" style="color: #ff0000;"></i></button>
+                                    <% } else {%>
+                                        <div id="RSVPForm">
+                                            <h4 class="rsvpStyling"><i>Going?</i></h4>
+                                            <button type="submit" formmethod="GET"
+                                                style="background-color: #228b22;">Yes</button>
+                                            <button type="submit" formmethod="GET"
+                                                style="background-color: #ff0000;">No</button>
+                                            <button type="submit" formmethod="GET"
+                                                style="background-color: lightskyblue;">Maybe</button>
+                                        </div>
+                                        <%}%>
+                                            <%}%>
+
+
+                </h4>
+                </i>
+            </form>
+        </div>
+        <img src="/<%= event.image %>" id="imageShowFile">
+
+        <div id="displayEventInfo">
+            <b><i>Host:</i></b>
+            <%= event.host.firstName + ' ' + event.host.lastName%>
+        </div>
+        <div id="displayEventInfo">
+            <b><i>Date and Time:</i></b>
+            <%= (new Date(event.startTime)).toLocaleString() + ' - ' + (new Date(event.endTime)).toLocaleString() %>
+        </div>
+        <div id="displayEventInfo">
+            <b><i>Location:</i></b>
+            <%= event.location%>
+        </div>
+        <div id="displayEventInfo">
+            <b><i>Details:</i></b>
+            <%= event.details%>
+        </div>
+    </div>
+    </div>
+    <%- include('../partials/footer.ejs')%>

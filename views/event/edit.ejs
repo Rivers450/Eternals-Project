@@ -1,0 +1,64 @@
+<%- include('../partials/header.ejs')%>
+    <div class="content">
+
+        <form method="POST" enctype="multipart/form-data" action="/events/<%= event.id%>?_method=PUT" class="new-form">
+            <br><br>
+            <label for="Category" id="categoryAlignment">Category:</label>
+            <div class=dropDown>
+                <select id="category" name="category" class="alignContent" required value="<%= event.category%>">
+                    <!--Displaying the old category-->
+                    <option value="" disabled hidden selected>Old Category: <%= event.category %>
+                    </option>
+                    <option value="Homework">Homework</option>
+                    <option value="Work">Work</option>
+                    <option value="Clubs">Clubs</option>
+                    <option value="Outings">Outings</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <br><br>
+            <label for="a" id="alignTitle">Title:</label>
+
+            <div class="title">
+                <input id="a" type="text" name="title" placeholder="Title" class="alignContent"
+                    value="<%= event.title%>"><br><br>
+            </div>
+            <label for="b" id="alignDetails">Details:</label>
+
+            <div class="details">
+
+                <input id="b" type="text" placeholder="Description" name="details" class="alignContent"
+                    value="<%= event.details%>"><br><br>
+            </div>
+
+            <label for="c" id="alignLocation">Where:</label>
+
+            <div class="location">
+                <input id="c" type="text" placeholder="Location" name="location" required class="alignContent"
+                    value="<%= event.location%>"><br><br>
+            </div>
+
+            <label for="DateToStart" id="alignStart">Start:</label>
+
+            <div class="start">
+                <input type="datetime-local" id="DateToStart" name="startTime" value="<%= event.startTime%>">
+            </div>
+
+            <label for="DateToEnd" id="alignEnd">End:</label>
+            <div class="end">
+                <input type="datetime-local" id="DateToEnd" name="endTime" class="alignContent"
+                    value="<%= event.endTime%>">
+            </div>
+
+            <label for="img" id="alignImage">Image:</label>
+
+            <div class="imageTextArea">
+                <input type="file" id="alignImage" name="image" class="alignContent" accept="image/*"
+                    value="<%= event.image%>" required><br>
+            </div>
+
+            <input type="submit" value="Submit">
+        </form>
+
+    </div>
+    <%- include('../partials/footer.ejs')%>

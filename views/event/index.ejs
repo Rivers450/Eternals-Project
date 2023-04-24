@@ -1,0 +1,73 @@
+<%- include('../partials/header.ejs')%>
+    <div class="content">
+        <%if(events.length){%>
+            <%if(Homework.length){%>
+                <h2><u>Homework</u></h2>
+                <ul>
+                    <%Homework.forEach(event=>{%>
+                        <li><a href="/events/<%= event.id%>">
+                                <div class="clubEvent">
+                                    <%=event.title%>
+                                </div>
+                            </a></li><br>
+                        <%})%>
+                </ul>
+                <%}%>
+                    <%if(Work.length){%>
+                        <h2><u>Work</u></h2>
+                        <ul>
+                            <%Work.forEach(event=>{%>
+                                <li><a href="/events/<%= event.id%>">
+                                        <div class="clubEvent">
+                                            <%=event.title%>
+                                        </div>
+                                    </a></li><br>
+                                <%})%>
+                        </ul>
+                        <%}%>
+                            <%if(Clubs.length){%>
+                                <h2><u>Clubs</u></h2>
+                                <ul>
+                                    <%Clubs.forEach(event=>{%>
+                                        <li><a href="/events/<%= event.id%>">
+                                                <div class="clubEvent">
+                                                    <%=event.title%>
+                                                </div>
+                                            </a></li>
+                                        <br>
+                                        <%})%>
+                                </ul>
+                                <%}%>
+                                    <%if(Outings.length){%>
+                                        <h2><u>Outings</u></h2>
+                                        <ul>
+                                            <%Outings.forEach(event=>{%>
+                                                <li><a href="/events/<%= event.id%>">
+                                                        <div class="clubEvent">
+                                                            <%=event.title%>
+                                                        </div>
+                                                    </a></li><br>
+
+                                                <%})%>
+                                        </ul>
+                                        <%}%>
+                                            <%if(Other.length){%>
+                                                <h2><u>Other</u></h2>
+                                                <ul>
+                                                    <%Other.forEach(event=>{%>
+                                                        <li><a href="/events/<%= event.id%>">
+                                                                <div class="clubEvent">
+                                                                    <%=event.title%>
+                                                                </div>
+                                                            </a></li><br>
+                                                        <%})%>
+                                                </ul>
+                                                <%}%>
+                                                    <%}else{%>
+                                                        <p id="centerText">There are no
+                                                            events to display.</p>
+                                                        <%}%>
+
+
+    </div>
+    <%- include('../partials/footer.ejs')%>

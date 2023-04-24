@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <script src="https://kit.fontawesome.com/e58f11f0a4.js" crossorigin="anonymous"></script>
+  <title>Eternals</title>
+
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+
+<body>
+
+  <div id="page-container">
+    <div id="content-wrap">
+      <div class="navigation-bar">
+        <a href="/"> <img src="/images/Eternals-1.png" alt="not working" id="logo"></a>
+        <div id="navigation-container">
+          <div id="alignNav">
+            <ul>
+              <!--If the user is not logged in then dispaly these two href's-->
+              <% if (!user) { %>
+                <li><a href='/users/new'>Sign Up</a></li>
+                <li><a href='/users/login'>Login</a></li>
+                <!--If the user is logged in then display these three href's-->
+                <% } else {%>
+                  <li><a href="/events/new">New Event</a></li>
+                  <li><a href='/users/profile'>Profile</a></li>
+                  <li><a href='/users/logout'>Logout</a></li>
+
+                  <% } %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sub-nav">
+        <ul>
+          <li class="subheader"><a href="/events">Events</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--If the error Message is more than a length of one then display the message-->
+  <div class="throwFlashError">
+    <% if(errorMessages.length> 0) {%>
+      <% errorMessages.forEach(message=>{%>
+        <%=message%>
+          <%});%>
+            <%}%>
+  </div>
+  <div class="throwFlashSuc">
+    <% if(successMessages.length> 0) {%>
+      <% successMessages.forEach(message=>{%>
+        <%=message%>
+  </div>
+  <%});%>
+    <%}%>
+      </div>
+      </div>

@@ -1,0 +1,10 @@
+<%- include('../partials/header.ejs') %>
+    <div class="container">
+        <h2 id = "errorMsg">
+            <%= error.status %> Error
+        </h2>
+        <p id = "errorMsg">
+            <%= error.message %>
+        </p>
+    </div>
+    <%- include('../partials/footer.ejs') %>

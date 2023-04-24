@@ -1,0 +1,48 @@
+<%- include('../partials/header.ejs')%>
+    <h2>Welcome, to your page <%=user.firstName + ' ' + user.lastName%>
+    </h2><br>
+
+    <% if (events.length> 0) { %>
+        <h3 class="changeFont">My Events:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% events.forEach(event=> { %>
+                    <tr>
+                        <td>
+                            <a href="/events/<%= event._id %>" class="StylingEventsProfile">
+                                <%= event.title %>
+                            </a>
+                        </td>
+                        <td>
+                            <form>
+
+                                <button type="submit" formaction="/events/<%= event._id %>/edit" formmethod="get"
+                                    value="Edit" id="editPageButtons">
+                                    <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #228b22;"></i>
+                                </button>
+                                <button type="submit" formaction="/events/<%= event._id %>?_method=DELETE"
+                                    formmethod="post" value="Delete" id="editPageButtons">
+                                    <i class="fa-sharp fa-solid fa-trash" style="color: #ff0000;"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <div class="ProfileNoEvents">
+                <h3 class="ProfileNoEvents">You have not created any events <a href="/events/new"><u>Would you like to
+                            create one
+                            now?</u></a></h3>
+            </div>
+            <% } %>
+
+                </div>
+                <%- include('../partials/footer.ejs')%>
