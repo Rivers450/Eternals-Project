@@ -2,14 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
-//Making a user Schema
 const userSchema = new Schema({
   firstName: { type: String, required: [true, 'The first name is required'] },
   lastName: { type: String, required: [true, 'The last name is required'] },
   email: { type: String, required: [true, 'The email address is required'], unique: [true, 'This email has been used already'] },
   password: { type: String, required: [true, 'The password is required'] },
 });
-//followed along with the videos
 userSchema.pre('save', function (next) {
   let user = this;
   if (!user.isModified('password'))
@@ -22,7 +20,6 @@ userSchema.pre('save', function (next) {
     .catch(err => next(err));
 });
 
-//comparing passwords
 userSchema.methods.comparePassword = function (inputPassword) {
   let user = this;
   return bcrypt.compare(inputPassword, user.password);

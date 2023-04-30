@@ -1,20 +1,18 @@
 const express = require('express');
-const { fileUpload } = require('../middleware/fileUpload');
-const controller = require('../controllers/eventController');
-const { isLoggedIn, isHost } = require('../middleware/auth');
-const { validateId } = require('../middleware/validator');
-
 const router = express.Router();
+
+const controller = require('../controllers/eventController');
+const { fileUpload } = require('../middleware/fileUpload');
+const { isLoggedIn, isHost, isGuest } = require('../middleware/auth');
+const { validateId, validateEvent, validateResult, getDateInputs, validateRSVP } = require('../middleware/validator');
 
 router.get('/', controller.index);
 router.get('/new', isLoggedIn, controller.new);
-router.post('/', isLoggedIn, fileUpload, controller.create);
+router.post('/', isLoggedIn, fileUpload, getDateInputs, validateEvent, validateResult, controller.create);
 router.get('/:id', validateId, controller.show);
 router.get('/:id/edit', validateId, isLoggedIn, isHost, controller.edit);
-router.put('/:id', validateId, isLoggedIn, isHost, fileUpload, controller.update);
+router.put('/:id', validateId, isLoggedIn, isHost, fileUpload, getDateInputs, validateEvent, validateResult, controller.update);
 router.delete('/:id', validateId, isLoggedIn, isHost, controller.delete);
-router.post('/:id/rsvp', validateId, isLoggedIn, controller.rsvp)
+router.post('/:id/rsvp', validateId, isLoggedIn, isGuest, validateRSVP, validateResult, controller.rsvp)
 
-
-//exporting the router
 module.exports = router;

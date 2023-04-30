@@ -5,7 +5,7 @@ exports.loginLimiter = rateLimit({
     max: 5,
     handler: (req, res, next) =>
     {
-        //send the errror message
+        //sending the errror message
         let err = new Error("Too many login requests. Please try again later.");
         err.status = 429;
         return next(err);
