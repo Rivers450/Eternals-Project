@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 const model = require('../models/eventModel');
 const RSVPmodel = require('../models/RSVP');
 
@@ -117,6 +117,7 @@ exports.update = (req, res, next) => {
 
 exports.delete = (req, res, next) => {
     let id = req.params.id;
+    model.findOneAndDelete({_id: id})
 
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
         let err = new Error('Invalid Event id');
@@ -126,7 +127,17 @@ exports.delete = (req, res, next) => {
     model.findByIdAndDelete(id, { useFindAndModify: false })
         .then(event => {
             if (event) {
-                res.redirect('/events');
+                RSVPmodel.find({event: new mongoose.Types.ObjectId(id)})
+                .then((results) =>
+                {
+                    results.forEach(result =>
+                        {
+                            console.log("Deleting the RSVP:", result.id);
+                            RSVPmodel.deleteOne({_id: result.id})
+                            .then(() => res.redirect('/events'))
+                            .catch(err => next(err))
+                        })
+                })
             } else {
                 let err = new Error('Cannot find a event with id ' + id);
                 err.status = 404;

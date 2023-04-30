@@ -15,6 +15,7 @@
                 <% events.forEach(event=> { %>
                     <tr>
                         <td>
+
                             <a href="/events/<%= event._id %>" class="StylingEventsProfile">
                                 <%= event.title %>
                             </a>
@@ -43,6 +44,34 @@
                             now?</u></a></h3>
             </div>
             <% } %>
+                <% if (rsvps.length> 0){%>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
 
-                </div>
-                <%- include('../partials/footer.ejs')%>
+                        <% rsvps.forEach(rsvp=> { %>
+
+                            <tbody>
+                                <tr>
+                                    <td><a href="/events/<%= rsvp.event._id %>" class="StylingEventsProfile">
+                                            <%= rsvp.event.title%>
+                                    </td>
+                                    </a>
+                                    <td>
+                                    <%=rsvp.status%>
+                                    </td>
+                                </tr>
+                                        <%})%>
+                                            <%}%>
+
+                                </tr>
+                            </tbody>
+
+                    </table>
+
+                    </div>
+                    <%- include('../partials/footer.ejs')%>

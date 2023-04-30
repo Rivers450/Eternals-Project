@@ -6,26 +6,29 @@
                         <%= event.title%>
                             <% if(user){%>
                                 <% if (event.host._id==user) { %>
-                                    <button type="submit" formmethod="GET" formaction="/events/<%=event.id%>/edit">
-                                        <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #228b22;"></i>
-                                    </button>
-                                    <button type="submit" formmethod="POST"
-                                        formaction="/events/<%=event.id%>?_method=DELETE">
-                                        <i class="fa-sharp fa-solid fa-trash" style="color: #ff0000;"></i></button>
-                                    <% } else {%>
-                                        <div id="RSVPForm">
-                                            <h4 class="rsvpStyling"><i>Going?</i></h4>
-                                            <button type="submit" formmethod="GET"
-                                                style="background-color: #228b22;">Yes</button>
-                                            <button type="submit" formmethod="GET"
-                                                style="background-color: #ff0000;">No</button>
-                                            <button type="submit" formmethod="GET"
-                                                style="background-color: lightskyblue;">Maybe</button>
-                                        </div>
-                                        <%}%>
+                                    <form>
+                                        <button type="submit" formmethod="GET" formaction="/events/<%=event.id%>/edit">
+                                            <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #228b22;"></i>
+                                        </button>
+                                        <button type="submit" formmethod="POST"
+                                            formaction="/events/<%=event.id%>?_method=DELETE">
+                                            <i class="fa-sharp fa-solid fa-trash" style="color: #ff0000;"></i></button>
+                                    </form>
+                                    <% } else if ((user) && (user !=event.host._id)) { %>
+                                        <form class = "rsvpForm">
+
+                                            <input type="submit" formaction="/events/<%= event.id %>/RSVP"
+                                                formmethod="post" value="Yes" title="RSVP Yes" name="rsvp"
+                                                class="statusYes">
+                                            <input type="submit" formaction="/events/<%= event.id %>/RSVP"
+                                                formmethod="post" value="No" title="RSVP No" name="rsvp"
+                                                class="statusNo">
+                                            <input type="submit" formaction="/events/<%= event.id %>/RSVP"
+                                                formmethod="post" value="Maybe" title="RSVP Maybe" name="rsvp"
+                                                class="statusMaybe">
+                                        </form>
+                                        <% } %>
                                             <%}%>
-
-
                 </h4>
                 </i>
             </form>
@@ -47,6 +50,10 @@
         <div id="displayEventInfo">
             <b><i>Details:</i></b>
             <%= event.details%>
+        </div>
+        <div id="displayEventInfo">
+            <b><i>Number of RSVPS:</i></b>
+            <%= rsvpValue %>
         </div>
     </div>
     </div>

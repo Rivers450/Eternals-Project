@@ -1,4 +1,4 @@
-const model = require("../models/user");
+const User = require("../models/user");
 const Event = require("../models/eventModel");
 const rsvp = require('../models/RSVP');
 
@@ -7,7 +7,7 @@ exports.new = (req, res) => {
 };
 
 exports.create = (req, res, next) => {
-  let user = new model(req.body);
+  let user = new User(req.body);
   user.save()
     .then((user) => res.redirect("/users/login"))
     .catch((err) => {
@@ -32,7 +32,7 @@ exports.getUserLogin = (req, res, next) => {
 exports.login = (req, res, next) => {
   let email = req.body.email;
   let password = req.body.password;
-  model
+  User
     .findOne({ email: email })
     .then((user) => {
       if (!user) {
@@ -59,7 +59,7 @@ exports.login = (req, res, next) => {
 
 exports.profile = (req, res, next) => {
   let id = req.session.user;
-  Promise.all([model.findById(id), Event.find({ host: id }), rsvp.find({ host: id }).populate('event')])
+  Promise.all([User.findById(id), Event.find({ host: id }), rsvp.find({ host: id }).populate('event')])
     .then((results) => {
       const [user, events, rsvps] = results;
       res.render("./user/profile", { user, events, rsvps });
