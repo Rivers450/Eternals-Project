@@ -5,7 +5,6 @@ const { loginLimiter } = require('../middleware/rateLimiter');
 const { validateSignup, validateLogin, validateResult } = require('../middleware/validator');
 
 const router = express.Router();
-
 router.get('/new', isGuest, controller.new);
 router.post('/', isGuest, loginLimiter, validateSignup, validateResult, controller.create);
 router.get('/login', isGuest, controller.getUserLogin);
