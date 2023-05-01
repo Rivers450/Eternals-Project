@@ -163,7 +163,7 @@ exports.rsvp = (req, res, next) => {
     RSVPmodel.findOneAndUpdate(query, update, options)
         .then((event) => {
             req.flash("success", "Your RSVP status is now set to: " + req.body.rsvp + "!")
-            return res.redirect('/events/' + id)
+            return res.redirect('/users/profile')
         })
         .catch((err) => {
             return next(err);
